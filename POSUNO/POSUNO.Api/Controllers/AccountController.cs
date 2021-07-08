@@ -73,7 +73,7 @@ namespace POSUNO.Api.Controllers
 
             return NoContent();
         }
-
+        
         [HttpPost]
         [Route("Login")]
         public async Task<ActionResult<User>> Login(LoginRequest model)
