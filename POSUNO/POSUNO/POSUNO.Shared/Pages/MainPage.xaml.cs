@@ -30,6 +30,7 @@ namespace POSUNO.Pages{
             base.OnNavigatedTo(e);
             User = (User)e.Parameter;
             WelcomeTextBlock.Text = $"Bienvenido(a): {User.FullName}";
+            MyFrame.Navigate(typeof(CustomersPage));
         }
         private async void LogoutImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -50,6 +51,16 @@ namespace POSUNO.Pages{
             };
 
             return await confirmDialog.ShowAsync();
+        }
+
+        private void CustomersNavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(CustomersPage));
+        }
+
+        private void ProductsNavigationViewItem_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(ProductsPage));
         }
     }
 }
