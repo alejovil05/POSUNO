@@ -19,11 +19,11 @@ namespace POSUNO.Helpers
 
                 HttpClientHandler handler = new HttpClientHandler()
                 {
-                    ServerCertificateCustomValidationCallback = 
+                    ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
                 };
 
-               // string url = Settings.GetApiUrl();
+                // string url = Settings.GetApiUrl();
                 HttpClient client = new HttpClient(handler)
                 {
                     BaseAddress = new Uri("https://localhost:44349/")
@@ -47,6 +47,51 @@ namespace POSUNO.Helpers
                     Result = user,
                 };
 
+
+            }
+            catch (Exception ex)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        public static async Task<Response> GetListAsync<T>(string controller)
+        {
+            try
+            {
+                HttpClientHandler handler = new HttpClientHandler()
+                {
+                    ServerCertificateCustomValidationCallback =
+                   HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                };
+
+                // string url = Settings.GetApiUrl();
+                HttpClient client = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri("https://localhost:44349/")
+                };
+                HttpResponseMessage response = await client.GetAsync($"api/{controller}");
+                string result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                List<T> list = JsonConvert.DeserializeObject<List<T>>(result);
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = list,
+                };
 
             }
             catch (Exception ex)

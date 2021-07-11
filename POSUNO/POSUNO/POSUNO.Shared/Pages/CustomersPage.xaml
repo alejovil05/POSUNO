@@ -39,7 +39,8 @@
                 <TextBlock Grid.Column="6" FontWeight="Bold" Text="Acción"/>
             </Grid>
             <Border Background="Black" Height="2" Margin="0,5"/>
-            <ScrollViewer Grid.Row="1">
+        </StackPanel>
+        <ScrollViewer Grid.Row="1">
                 <ListView x:Name="CustomersListView" ItemsSource="{x:Bind Customers}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -76,6 +77,5 @@
                     </ListView.ItemTemplate>
                 </ListView>               
             </ScrollViewer>
-        </StackPanel>
     </Grid>
 </Page>
